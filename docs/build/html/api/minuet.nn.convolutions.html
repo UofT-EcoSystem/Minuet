@@ -1,0 +1,502 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>minuet.nn.convolutions &#8212; Minuet  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/minuet.nn.convolutions';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="minuet.nn.functional" href="minuet.nn.functional.html" />
+    <link rel="prev" title="minuet.nn.activations" href="minuet.nn.activations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">🎶 Minuet</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        APIs
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+  </div>
+  
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../api.html">
+                        APIs
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="minuet.nn.html">minuet.nn</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="minuet.nn.activations.html">minuet.nn.activations</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">minuet.nn.convolutions</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="minuet.nn.functional.html">minuet.nn.functional</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="minuet.nn.functional.concat.html">minuet.nn.functional.concat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minuet.nn.functional.convolution.html">minuet.nn.functional.convolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minuet.nn.functional.hash.html">minuet.nn.functional.hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minuet.nn.functional.indexing.html">minuet.nn.functional.indexing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minuet.nn.functional.memory.html">minuet.nn.functional.memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minuet.nn.functional.pooling.html">minuet.nn.functional.pooling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minuet.nn.functional.scan.html">minuet.nn.functional.scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="minuet.nn.functional.voxelize.html">minuet.nn.functional.voxelize</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="minuet.nn.normalizations.html">minuet.nn.normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="minuet.nn.pooling.html">minuet.nn.pooling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="minuet.utils.html">minuet.utils</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="minuet.utils.helpers.html">minuet.utils.helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="minuet.utils.random.html">minuet.utils.random</a></li>
+<li class="toctree-l2"><a class="reference internal" href="minuet.utils.typing.html">minuet.utils.typing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="minuet.tensors.html">minuet.tensors</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api.html" class="nav-link">Python APIs</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="minuet.nn.html" class="nav-link">minuet.nn</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">minuet.nn.co...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="module-minuet.nn.convolutions">
+<span id="minuet-nn-convolutions"></span><h1>minuet.nn.convolutions<a class="headerlink" href="#module-minuet.nn.convolutions" title="Permalink to this heading">#</a></h1>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#minuet.nn.convolutions.KernelMapCache" title="minuet.nn.convolutions.KernelMapCache"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KernelMapCache</span></code></a>(ndim, dtype, device[, ...])</p></td>
+<td><p><a class="reference internal" href="#minuet.nn.convolutions.KernelMapCache" title="minuet.nn.convolutions.KernelMapCache"><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelMapCache</span></code></a> builds kernel map without duplicates.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#minuet.nn.convolutions.SparseConv" title="minuet.nn.convolutions.SparseConv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SparseConv</span></code></a>(ndim, in_channels, out_channels, ...)</p></td>
+<td><p>Applies a sparse convolution over a <a class="reference internal" href="minuet.tensors.html#minuet.tensors.SparseTensor" title="minuet.tensors.SparseTensor"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseTensor</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#minuet.nn.convolutions.SparseConv3d" title="minuet.nn.convolutions.SparseConv3d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SparseConv3d</span></code></a>(in_channels, out_channels, ...)</p></td>
+<td><p>Applies a 3-D sparse convolution over an input point cloud and produces an output point cloud.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="minuet.nn.convolutions.KernelMapCache">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">KernelMapCache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ndim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.dtype" title="(in PyTorch v2.1)"><span class="pre">dtype</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device" title="(in PyTorch v2.1)"><span class="pre">device</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'minuet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disable_reordering</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#minuet.nn.convolutions.KernelMapCache" title="Permalink to this definition">#</a></dt>
+<dd><p><a class="reference internal" href="#minuet.nn.convolutions.KernelMapCache" title="minuet.nn.convolutions.KernelMapCache"><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelMapCache</span></code></a> builds kernel map without duplicates. It works
+jointly with <a class="reference internal" href="#minuet.nn.convolutions.SparseConv" title="minuet.nn.convolutions.SparseConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseConv</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="minuet.nn.convolutions.SparseConv">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SparseConv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ndim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.12)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.12)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dilation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.12)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transposed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.dtype" title="(in PyTorch v2.1)"><span class="pre">dtype</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device" title="(in PyTorch v2.1)"><span class="pre">device</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#minuet.nn.convolutions.SparseConv" title="Permalink to this definition">#</a></dt>
+<dd><p>Applies a sparse convolution over a <a class="reference internal" href="minuet.tensors.html#minuet.tensors.SparseTensor" title="minuet.tensors.SparseTensor"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseTensor</span></code></a>.</p>
+<p>Each input point cloud in the <a class="reference internal" href="minuet.tensors.html#minuet.tensors.SparseTensor" title="minuet.tensors.SparseTensor"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseTensor</span></code></a>
+consists of a set of non-zero points (i.e. the coordinate tensor of the
+<a class="reference internal" href="minuet.tensors.html#minuet.tensors.SparseTensor" title="minuet.tensors.SparseTensor"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseTensor</span></code></a>)
+<span class="math notranslate nohighlight">\(\mathcal{P} = \{\mathbf{p_j}\}\)</span> and its corresponding features
+<span class="math notranslate nohighlight">\(\{\mathbf{F^\mathcal{P}_j}\}\)</span>
+(i.e. the feature tensor of the <a class="reference internal" href="minuet.tensors.html#minuet.tensors.SparseTensor" title="minuet.tensors.SparseTensor"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseTensor</span></code></a>).
+With the stride <span class="math notranslate nohighlight">\(s\)</span>, the sparse convolution will produce an output
+point cloud, where the set of non-zero points are generated as follows:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{Q} = \left\{
+  \left(
+    \left\lfloor \frac{x}{s} \right\rfloor \times s,
+    \left\lfloor \frac{y}{s} \right\rfloor \times s,
+    \left\lfloor \frac{z}{s} \right\rfloor \times s
+  \right)
+  ~\middle|~
+  (x, y, z) \in \mathcal{P}
+\right\}\]</div>
+<p>The output feature vector <span class="math notranslate nohighlight">\(\mathbf{F^\mathcal{Q}_i}\)</span> of each output
+coordinate <span class="math notranslate nohighlight">\(\mathbf{q_i}\)</span> is computed as follows:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{F^\mathcal{Q}_i} =
+  \sum_{\mathbf{p_j} \in \mathcal{P}}
+  \sum_{\boldsymbol{\delta_k} \in \Delta}
+    𝟙_{\mathbf{p_j} = \mathbf{q_i} + \boldsymbol{\delta_k}}
+    \mathbf{F^\mathcal{P}_j} \mathbf{W_k}\]</div>
+<p>The <span class="math notranslate nohighlight">\(\Delta\)</span> denotes the weight offsets, generated by
+<a class="reference internal" href="minuet.utils.helpers.html#minuet.utils.helpers.generate_kernel_offsets" title="minuet.utils.helpers.generate_kernel_offsets"><code class="xref py py-func docutils literal notranslate"><span class="pre">generate_kernel_offsets()</span></code></a>.</p>
+<dl class="simple">
+<dt>Shape:</dt><dd><p>If there are <span class="math notranslate nohighlight">\(N\)</span> input points and <span class="math notranslate nohighlight">\(M\)</span> output points, then:</p>
+<ul class="simple">
+<li><p>Input coordinate tensor: <span class="math notranslate nohighlight">\([N, 3]\)</span></p></li>
+<li><p>Input feature tensor: <span class="math notranslate nohighlight">\([N, C_\text{in}]\)</span></p></li>
+<li><p>Output coordinate tensor: <span class="math notranslate nohighlight">\([M, 3]\)</span></p></li>
+<li><p>Output feature tensor: <span class="math notranslate nohighlight">\([M, C_\text{out}]\)</span></p></li>
+<li><p>Kernel weight offsets: <span class="math notranslate nohighlight">\([K^3, 3]\)</span></p></li>
+<li><p>Kernel weights: <span class="math notranslate nohighlight">\([K^3, C_\text{in}, C_\text{out}]\)</span></p></li>
+<li><p>Bias (if enabled): <span class="math notranslate nohighlight">\([C_\text{out}]\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ndim</strong> – the number of coordinate dimensions</p></li>
+<li><p><strong>in_channels</strong> – the number of input feature channels <span class="math notranslate nohighlight">\(C_\text{in}\)</span></p></li>
+<li><p><strong>out_channels</strong> – the number of input feature channels <span class="math notranslate nohighlight">\(C_\text{out}\)</span></p></li>
+<li><p><strong>kernel_size</strong> – the kernel size of the sparse convolution <span class="math notranslate nohighlight">\(K\)</span></p></li>
+<li><p><strong>stride</strong> – the stride of the sparse convolution <span class="math notranslate nohighlight">\(s\)</span></p></li>
+<li><p><strong>dilation</strong> – the dilation of the sparse convolution</p></li>
+<li><p><strong>bias</strong> – whether enables bias weight in the sparse convolution</p></li>
+<li><p><strong>transposed</strong> – whether enables transposed sparse convolution</p></li>
+<li><p><strong>dtype</strong> – the data type of the weights</p></li>
+<li><p><strong>device</strong> – the device to store the weights</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="minuet.nn.convolutions.SparseConv.autotune">
+<span class="sig-name descname"><span class="pre">autotune</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">free_buffers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#minuet.nn.convolutions.SparseConv.autotune" title="Permalink to this definition">#</a></dt>
+<dd><p>A context for autotuning the current <a class="reference internal" href="#minuet.nn.convolutions.SparseConv" title="minuet.nn.convolutions.SparseConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseConv</span></code></a>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">conv</span> <span class="o">=</span> <span class="n">SparseConv</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">conv</span><span class="o">.</span><span class="n">autotune</span><span class="p">():</span>
+  <span class="k">for</span> <span class="n">inputs</span> <span class="ow">in</span> <span class="n">data_loader</span><span class="p">:</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">conv</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>free_buffers</strong> – whether to release all buffers after autotuning for
+saving GPU memory</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="minuet.nn.convolutions.SparseConv.reset_parameters">
+<span class="sig-name descname"><span class="pre">reset_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#minuet.nn.convolutions.SparseConv.reset_parameters" title="Permalink to this definition">#</a></dt>
+<dd><p>Randomly initialize all weights for the <a class="reference internal" href="#minuet.nn.convolutions.SparseConv" title="minuet.nn.convolutions.SparseConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseConv</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="minuet.nn.convolutions.SparseConv.set_kernel_map_cache">
+<span class="sig-name descname"><span class="pre">set_kernel_map_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#minuet.nn.convolutions.KernelMapCache" title="minuet.nn.convolutions.KernelMapCache"><span class="pre">KernelMapCache</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#minuet.nn.convolutions.SparseConv.set_kernel_map_cache" title="Permalink to this definition">#</a></dt>
+<dd><p>Set the kernel map cache for the current <a class="reference internal" href="#minuet.nn.convolutions.SparseConv" title="minuet.nn.convolutions.SparseConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseConv</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cache</strong> – the cache to be attached to the current <a class="reference internal" href="#minuet.nn.convolutions.SparseConv" title="minuet.nn.convolutions.SparseConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseConv</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="minuet.nn.convolutions.SparseConv.tunable_config">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tunable_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.12)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#minuet.nn.convolutions.SparseConv.tunable_config" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns:
+all tunable configurations for the <a class="reference internal" href="#minuet.nn.convolutions.SparseConv" title="minuet.nn.convolutions.SparseConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseConv</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="minuet.nn.convolutions.SparseConv3d">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SparseConv3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.12)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.12)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dilation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.12)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bias</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.dtype" title="(in PyTorch v2.1)"><span class="pre">dtype</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://pytorch.org/docs/stable/tensor_attributes.html#torch.device" title="(in PyTorch v2.1)"><span class="pre">device</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#minuet.nn.convolutions.SparseConv3d" title="Permalink to this definition">#</a></dt>
+<dd><p>Applies a 3-D sparse convolution over an input point cloud and produces
+an output point cloud. Please refer to <a class="reference internal" href="#minuet.nn.convolutions.SparseConv" title="minuet.nn.convolutions.SparseConv"><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseConv</span></code></a> for the meanings
+of each parameter.</p>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minuet.nn.convolutions.KernelMapCache"><code class="docutils literal notranslate"><span class="pre">KernelMapCache</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minuet.nn.convolutions.SparseConv"><code class="docutils literal notranslate"><span class="pre">SparseConv</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minuet.nn.convolutions.SparseConv.autotune"><code class="docutils literal notranslate"><span class="pre">SparseConv.autotune()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minuet.nn.convolutions.SparseConv.reset_parameters"><code class="docutils literal notranslate"><span class="pre">SparseConv.reset_parameters()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minuet.nn.convolutions.SparseConv.set_kernel_map_cache"><code class="docutils literal notranslate"><span class="pre">SparseConv.set_kernel_map_cache()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minuet.nn.convolutions.SparseConv.tunable_config"><code class="docutils literal notranslate"><span class="pre">SparseConv.tunable_config</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minuet.nn.convolutions.SparseConv3d"><code class="docutils literal notranslate"><span class="pre">SparseConv3d</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

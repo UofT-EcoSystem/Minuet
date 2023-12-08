@@ -1,0 +1,30 @@
+minuet.nn.functional.hash
+=========================
+
+.. automodule:: minuet.nn.functional.hash
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      simple_hash
+      unique_coordinates
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

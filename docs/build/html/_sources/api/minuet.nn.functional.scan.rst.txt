@@ -1,0 +1,30 @@
+minuet.nn.functional.scan
+=========================
+
+.. automodule:: minuet.nn.functional.scan
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      compute_kernel_map_masks
+      compute_kernel_map_sizes
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,29 @@
+minuet.utils.random
+===================
+
+.. automodule:: minuet.utils.random
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      random_unique_points
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

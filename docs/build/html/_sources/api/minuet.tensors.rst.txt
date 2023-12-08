@@ -1,0 +1,29 @@
+﻿minuet.tensors
+==============
+
+.. automodule:: minuet.tensors
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      SparseTensor
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,29 @@
+minuet.nn.normalizations
+========================
+
+.. automodule:: minuet.nn.normalizations
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      BatchNorm
+   
+   
+
+   
+   
+   
+
+
+

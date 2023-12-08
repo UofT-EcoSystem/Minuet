@@ -1,0 +1,30 @@
+minuet.utils.typing
+===================
+
+.. automodule:: minuet.utils.typing
+
+   
+   
+   .. rubric:: Module Attributes
+
+   .. autosummary::
+   
+      ScalarOrTuple
+      ScalarOrIterable
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

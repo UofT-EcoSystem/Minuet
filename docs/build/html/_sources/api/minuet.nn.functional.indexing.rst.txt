@@ -1,0 +1,31 @@
+minuet.nn.functional.indexing
+=============================
+
+.. automodule:: minuet.nn.functional.indexing
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      arg_sort_coordinates
+      build_sorted_index
+      query_sorted_index_with_offsets
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

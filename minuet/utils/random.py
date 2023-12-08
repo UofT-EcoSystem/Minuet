@@ -1,11 +1,28 @@
-__all__ = ['random_points', 'batch_random_points']
+__all__ = ['random_unique_points']
 
 import random
 
 import numpy as np
 
 
-def random_points(ndim, n, c_min, c_max, dtype=np.int32):
+def random_unique_points(ndim: int,
+                         n: int,
+                         c_min: int,
+                         c_max: int,
+                         dtype=np.int32):
+  r"""
+  Generate random coordinates without duplicates
+
+  Args:
+    ndim: the dimension of each coordinate
+    n: the number of points to be generated
+    c_min: the minimum coordinate
+    c_max: the maximum coordinate
+    dtype: the coordinate data type
+
+  Returns:
+    a numpy array consists of generated coordinates
+  """
   tables = {}
   max_coords = pow(c_max - c_min + 1, ndim)
   if n > max_coords:
@@ -23,12 +40,3 @@ def random_points(ndim, n, c_min, c_max, dtype=np.int32):
       point.append(x + c_min)
     points.append(point)
   return np.asarray(points, dtype=dtype)
-
-
-def batch_random_points(ndim, n, batch_size, c_min, c_max, dtype=np.int32):
-  batch = [
-      random_points(ndim, n, c_min, c_max, dtype) for _ in range(batch_size)
-  ]
-  batch_dims = np.arange(0, batch_size + 1) * n
-  batch = np.concatenate(batch, axis=0, dtype=dtype)
-  return batch, batch_dims

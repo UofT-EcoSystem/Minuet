@@ -1,0 +1,35 @@
+﻿minuet.nn
+=========
+
+.. automodule:: minuet.nn
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   minuet.nn.activations
+   minuet.nn.convolutions
+   minuet.nn.functional
+   minuet.nn.normalizations
+   minuet.nn.pooling
+

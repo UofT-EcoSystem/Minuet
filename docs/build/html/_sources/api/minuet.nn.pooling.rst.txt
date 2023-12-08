@@ -1,0 +1,31 @@
+minuet.nn.pooling
+=================
+
+.. automodule:: minuet.nn.pooling
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      GlobalAvgPool
+      GlobalMaxPool
+      GlobalSumPool
+   
+   
+
+   
+   
+   
+
+
+
