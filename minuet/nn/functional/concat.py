@@ -7,6 +7,20 @@ from minuet import SparseTensor
 
 
 def cat(tensors: Iterable[SparseTensor]) -> SparseTensor:
+  r"""
+  Concatenate multiple :py:class:`~minuet.tensors.SparseTensor`
+  with the same coordinate tensors.
+
+  Notes:
+    The equality of the coordinate tensors will not be checked
+
+  Args:
+    tensors: the tensors to be concatenated
+
+  Returns:
+    the concatenated tensor
+
+  """
   tensors = list(tensors)
   features = torch.cat([tensor.F for tensor in tensors], dim=1)
   return SparseTensor(coordinates=tensors[0].C,

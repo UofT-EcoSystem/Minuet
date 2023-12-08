@@ -1,4 +1,4 @@
-__all__ = ['PointTensor', 'SparseTensor']
+__all__ = ['SparseTensor']
 
 from typing import Optional
 
@@ -8,9 +8,9 @@ from minuet.utils.helpers import as_tuple
 from minuet.utils.typing import ScalarOrTuple
 
 
-def check_tensors(features: torch.Tensor,
-                  coordinates: torch.Tensor,
-                  indices: Optional[torch.Tensor] = None):
+def _check_tensors(features: torch.Tensor,
+                   coordinates: torch.Tensor,
+                   indices: Optional[torch.Tensor] = None):
   if coordinates.ndim != 2:
     raise ValueError(f"The coordinates tensor must be a 2-D tensor but found "
                      f"{coordinates.ndim}-D")
@@ -35,107 +35,30 @@ def check_tensors(features: torch.Tensor,
                        f"{indices.ndim}-D")
 
 
-class PointTensor(object):
-
-  def __init__(self, features: torch.Tensor, coordinates: torch.Tensor):
-    check_tensors(features, coordinates)
-    self._features = features
-    self._coordinates = coordinates
-
-  @property
-  def device(self):
-    return self._coordinates.device
-
-  @property
-  def dtype(self):
-    return self._features.dtype
-
-  @property
-  def shape(self):
-    return self._features.shape
-
-  @property
-  def F(self):
-    return self._features
-
-  @F.setter
-  def F(self, features: torch.Tensor):
-    if features.device != self._features.device:
-      raise ValueError(f"The new features is on the device {features.device} "
-                       f"which is different from expected "
-                       f"{self._features.device}")
-    if features.shape != self._features.shape:
-      raise ValueError(f"The new features has shape {features.shape} which is "
-                       f"different from expected {self._features.shape}")
-    self._features = features
-
-  @property
-  def C(self):
-    return self._coordinates
-
-  @property
-  def ndim(self):
-    return self._coordinates.shape[1]
-
-  @property
-  def n(self):
-    return self._coordinates.shape[0]
-
-  def clone(self):
-    return PointTensor(self._features.clone(), self._coordinates.clone())
-
-  def to(self,
-         device: Optional[torch.device] = None,
-         dtype: Optional[torch.dtype] = None,
-         non_blocking: bool = False,
-         copy: bool = False):
-    kwargs = {'device': device, 'non_blocking': non_blocking, 'copy': copy}
-    if copy:
-      coordinates = self._coordinates.to(**kwargs)
-      features = self._features.to(**kwargs, dtype=dtype)
-      return PointTensor(features, coordinates)
-
-    self._coordinates = self._coordinates.to(**kwargs)
-    self._features = self._features.to(**kwargs, dtype=dtype)
-    return self
-
-  def cuda(self,
-           device: Optional[torch.device] = None,
-           non_blocking: bool = False):
-    kwargs = {'device': device, 'non_blocking': non_blocking}
-    self._coordinates = self._coordinates.cuda(**kwargs)
-    self._features = self._features.cuda(**kwargs)
-    return self
-
-  def cpu(self):
-    self._coordinates = self._coordinates.cpu()
-    self._features = self._features.cpu()
-    return self
-
-  def detach(self):
-    return PointTensor(features=self._features.detach(),
-                       coordinates=self._coordinates.detach())
-
-  def detach_(self):
-    self._coordinates = self._coordinates.detach_()
-    self._features = self._features.detach_()
-    return self
-
-
 class SparseTensor(object):
-  """
+  r"""
   SparseTensor stores coordinates along with its features. There are several
   constraints of the coordinates for the sparse tensor:
 
-  * The coordinates tensor should only have 2 dimensions of shape (N, NDIM).
-    Where N denotes the number of tensors and NDIM denotes the number of
-    dimensions (typically it is just 3).
-  * All coordinates should be all integers (otherwise refer to the PointTensor
-    instead). Specifically, they should be either `torch.int32` or
-    `torch.int64`.
+  * The coordinates tensor should only have :math:`2` dimensions of shape
+    :math:`(N, D)`. Where :math:`N` denotes the number of points and
+    :math:`D` denotes the number of dimensions (typically it is just :math:`3`).
+  * All coordinates should be all integers. Specifically,
+    their data types should be either :code:`torch.int32` or :code:`torch.int64`.
   * All coordinates should be unique and sorted.
   * The number of features should match the number of coordinates.
   * Both features and coordinates should be on the same device.
+
+  Note that a :py:class:`SparseTensor` can store multiple point clouds. This is
+  achieved by the :py:attr:`batch_dims` tensor, where the indices of the points
+  and the features of the :math:`i`-th point cloud are within the interval
+  :math:`[\text{batch_dims}[i], \text{batch_dims}[i + 1])`.
+
+  Args:
+    features: the tensor that stores all features of the point clouds
+    coordinates: the coordinate that stores all coordinates of the point clouds
+    stride: the stride of the tensor
+    batch_dims: :attr:`None` the indices of each point cloud
   """
 
   def __init__(self,
@@ -144,7 +67,7 @@ class SparseTensor(object):
                *,
                stride: ScalarOrTuple[int] = 1,
                batch_dims: Optional[torch.Tensor] = None):
-    check_tensors(features, coordinates)
+    _check_tensors(features, coordinates)
     if coordinates.dtype not in (torch.int32, torch.int64):
       raise ValueError(f"The coordinates tensor must be int32 or int64 "
                        f"but found {coordinates.dtype}")
@@ -157,30 +80,49 @@ class SparseTensor(object):
 
   @property
   def batch_size(self):
+    r"""
+    The number of the point clouds of the current :py:class:`SparseTensor`
+    """
     return 1 if self._batch_dims is None else len(self._batch_dims) - 1
 
   @property
   def batch_dims(self):
+    r"""The batch dims of the current :py:class:`SparseTensor`"""
     return self._batch_dims
 
   @property
   def device(self):
+    r"""Similar to :py:meth:`torch.Tensor.device`"""
     return self._coordinates.device
 
   @property
   def dtype(self):
+    r"""
+    The data type of the feature tensor of the current
+    :py:class:`SparseTensor`
+    """
     return self._features.dtype
 
   @property
   def shape(self):
+    r"""
+    The shape of the feature tensor of the current :py:class:`SparseTensor`
+    """
     return self._features.shape
 
   @property
   def num_features(self):
+    r"""
+    The number of the feature channels of the feature tensor of the current
+    :py:class:`SparseTensor`
+    """
     return self._features.shape[1]
 
   @property
   def F(self):
+    r"""
+    The feature tensor of the current :py:class:`SparseTensor`
+    """
     return self._features
 
   @F.setter
@@ -196,21 +138,37 @@ class SparseTensor(object):
 
   @property
   def C(self):
+    r"""The coordinate tensor of the current :py:class:`SparseTensor`"""
     return self._coordinates
 
   @property
   def stride(self):
+    r"""The stride of the current :py:class:`SparseTensor`"""
     return self._stride
 
   @property
   def ndim(self):
+    r"""
+    The number of dimensions of the coordinates of the current
+    :py:class:`SparseTensor`
+    """
     return self._coordinates.shape[1]
 
   @property
   def n(self):
+    r"""
+    The number of coordinates of all point clouds in the current
+    :py:class:`SparseTensor`
+    """
     return self._coordinates.shape[0]
 
   def clone(self):
+    r"""
+    To clone the current :py:class:`SparseTensor`
+
+    Returns:
+      A cloned :py:class:`SparseTensor`
+    """
     batch_dims = None
     if self._batch_dims is not None:
       batch_dims = self._batch_dims.clone()
@@ -224,6 +182,11 @@ class SparseTensor(object):
          dtype: Optional[torch.dtype] = None,
          non_blocking: bool = False,
          copy: bool = False):
+    r"""
+    Similar to applying :py:meth:`torch.Tensor.cuda` on both the coordinate and
+    the feature tensors. The only catch is that ``dtype`` parameter only applies
+    to the feature tensor.
+    """
     kwargs = {'device': device, 'non_blocking': non_blocking, 'copy': copy}
     if copy:
       coordinates = self._coordinates.to(**kwargs)
@@ -243,6 +206,10 @@ class SparseTensor(object):
   def cuda(self,
            device: Optional[torch.device] = None,
            non_blocking: bool = False):
+    r"""
+    Similar to applying :py:meth:`torch.Tensor.cuda` on both the coordinate and
+    the feature tensors
+    """
     kwargs = {'device': device, 'non_blocking': non_blocking}
     self._coordinates = self._coordinates.cuda(**kwargs)
     self._features = self._features.cuda(**kwargs)
@@ -251,6 +218,10 @@ class SparseTensor(object):
     return self
 
   def cpu(self):
+    r"""
+    Similar to applying :py:meth:`torch.Tensor.cpu` on both the coordinate and
+    the feature tensors
+    """
     self._coordinates = self._coordinates.cpu()
     self._features = self._features.cpu()
     if self._batch_dims is not None:
@@ -258,20 +229,33 @@ class SparseTensor(object):
     return self
 
   def detach(self):
+    r"""
+    Similar to applying :py:meth:`torch.Tensor.detach` on the feature tensor
+    """
     return SparseTensor(self._features.detach(),
                         self._coordinates,
                         stride=self._stride,
                         batch_dims=self._batch_dims)
 
   def detach_(self):
+    r"""
+    Similar to applying :py:meth:`torch.Tensor.detach_` on the feature tensor
+    """
     self._features = self._features.detach_()
     return self
 
   def backward(self, **kwargs):
+    """
+    Similar to applying :py:meth:`torch.Tensor.backward` on the feature tensor
+    """
     return self._features.backward(**kwargs)
 
   @property
   def requires_grad(self):
+    """
+    Similar to applying :py:attr:`torch.Tensor.requires_grad` on
+    the feature tensor
+    """
     return self._features.requires_grad
 
   @requires_grad.setter
@@ -279,6 +263,10 @@ class SparseTensor(object):
     self._features.requires_grad = value
 
   def contiguous(self):
+    """
+    Similar to applying :py:meth:`torch.Tensor.contiguous` on both the
+    coordinate and the feature tensors
+    """
     self._coordinates = self._coordinates.contiguous()
     self._features = self._features.contiguous()
     if self._batch_dims is not None:
@@ -286,6 +274,9 @@ class SparseTensor(object):
     return self
 
   def half(self):
+    """
+    Similar to applying :py:meth:`torch.Tensor.half` on the feature tensor
+    """
     return SparseTensor(features=self._features.half(),
                         coordinates=self._coordinates,
                         stride=self._stride,

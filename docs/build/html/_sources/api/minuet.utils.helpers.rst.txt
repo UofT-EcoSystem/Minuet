@@ -1,0 +1,34 @@
+minuet.utils.helpers
+====================
+
+.. automodule:: minuet.utils.helpers
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      as_tuple
+      autotune
+      dump_tunable_config
+      generate_kernel_offsets
+      load_tunable_config
+      set_kernel_map_cache
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

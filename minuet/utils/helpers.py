@@ -11,11 +11,32 @@ from typing import Iterable, Optional
 import numpy as np
 from torch.nn import Module
 
-from minuet.utils.file_system import ensure_directory
-from minuet.utils.typing import ScalarOrTuple, KernelMapCache, SparseTensor, ScalarOrIterable
+import minuet
+from minuet.utils.typing import ScalarOrTuple, ScalarOrIterable
 
 
-def set_kernel_map_cache(module: Module, cache: KernelMapCache):
+def _ensure_directory(path, create_if_not_exist=True):
+  if not os.path.exists(path):
+    if create_if_not_exist:
+      os.makedirs(path)
+    else:
+      raise RuntimeError(f"Directory {path} does not exist")
+  elif not os.path.isdir(path):
+    raise RuntimeError(f"Path {path} is not a directory")
+  return path
+
+
+def set_kernel_map_cache(module: Module, cache: 'minuet.nn.KernelMapCache'):
+  r"""
+  Set kernel map cache for a given :py:class:`torch.nn.Module` recursively.
+
+  Args:
+    module: a given :py:class:`torch.nn.Module` instance
+    cache: a :py:class:`~minuet.nn.convolutions.KernelMapCache` instance
+
+  Returns:
+    the original :py:class:`torch.nn.Module` instance
+  """
   if hasattr(module, "set_kernel_map_cache"):
     module.set_kernel_map_cache(cache)
 
@@ -26,9 +47,22 @@ def set_kernel_map_cache(module: Module, cache: KernelMapCache):
 
 
 def autotune(model: Module,
-             model_cache: KernelMapCache,
-             data: ScalarOrIterable[SparseTensor],
+             model_cache: 'minuet.nn.KernelMapCache',
+             data: ScalarOrIterable['minuet.SparseTensor'],
              cache_path: Optional[str] = None):
+  r"""
+  Autotune a given :py:class:`torch.nn.Module` recursively.
+
+  Args:
+    model: a given :py:class:`torch.nn.Module` instance
+    model_cache: a :py:class:`~minuet.nn.convolutions.KernelMapCache` instance
+    data: an iterable instance that generates
+      :py:class:'~minuet.tensors.SparseTensor'
+    cache_path: the path to which the autotuned configurations will be stored
+
+  Returns:
+    the original :py:class:`torch.nn.Module` instance
+  """
   from minuet import SparseTensor
   if isinstance(data, SparseTensor):
     data = [data]
@@ -53,7 +87,7 @@ def autotune(model: Module,
       _ = model(tensor)
 
   if cache_path is not None:
-    ensure_directory(path=os.path.dirname(cache_path))
+    _ensure_directory(path=os.path.dirname(cache_path))
     with open(cache_path, "w") as writer:
       json.dump(dump_tunable_config(model), writer, indent=2)
 
@@ -61,6 +95,17 @@ def autotune(model: Module,
 
 
 def load_tunable_config(module: Module, config: dict):
+  r"""
+  Load tunable configurations for a :py:class:`torch.nn.Module` recursively
+  from a dict
+
+  Args:
+    module: a given :py:class:`torch.nn.Module` instance
+    config: the configuration dict
+
+  Returns:
+    the original :py:class:`torch.nn.Module` instance
+  """
   if hasattr(module, "tunable_config"):
     module.tunable_config.update(config)
 
@@ -71,6 +116,16 @@ def load_tunable_config(module: Module, config: dict):
 
 
 def dump_tunable_config(module: Module) -> dict:
+  r"""
+  Dump tunable configurations of a :py:class:`torch.nn.Module` recursively
+  to a dict
+
+  Args:
+    module: a given :py:class:`torch.nn.Module` instance
+
+  Returns:
+    the configuration dict
+  """
   if hasattr(module, "tunable_config"):
     return module.tunable_config
   config = dict()
@@ -84,6 +139,17 @@ def as_tuple(value: ScalarOrTuple,
              *,
              size: int = 3,
              name: Optional[str] = None):
+  r"""
+  Make a given value as a tuple of size :code:`size`
+
+  Args:
+    value: The value for making a tuple
+    size: The size of the tuple
+    name: The name of the tuple. Useful for showing exceptions.
+
+  Returns:
+    A tuple of size :code:`size`.
+  """
   name = name or "Value"
   if not isinstance(value, Iterable):
     value = tuple(value for _ in range(size))
@@ -101,6 +167,20 @@ def generate_kernel_offsets(ndim: int,
                             source_stride: ScalarOrTuple[int],
                             dilation: ScalarOrTuple[int],
                             layout: str = "minuet"):
+  r"""
+  Generate the kernel weight offsets for :py:class:`~minuet.nn.SparseConv`
+
+  Args:
+    ndim: the dimension of each weight offset
+    kernel_size: the kernel size of :py:class:`~minuet.nn.SparseConv`
+    source_stride: the tensor stride of the input
+    dilation: the dilation of :py:class:`~minuet.nn.SparseConv`
+    layout: the layout of the sparse convolution, only ``minuet``,
+      ``minkowski``, and ``torchsparse`` are supported
+
+  Returns:
+    a numpy array consists of the generated sparse convolution
+  """
   kernel_size = as_tuple(kernel_size, size=ndim, name="kernel_size")
   source_stride = as_tuple(source_stride, size=ndim, name="source_stride")
   dilation = as_tuple(dilation, size=ndim, name="dilation")

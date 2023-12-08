@@ -2,10 +2,25 @@ __all__ = ['global_avg_pool', 'global_max_pool', 'global_sum_pool']
 
 import torch
 
-from minuet.utils.typing import SparseTensor
+from minuet.tensors import SparseTensor
 
 
 def global_avg_pool(x: SparseTensor):
+  """
+  Applies average pooling on the given :py:class:`~minuet.tensors.SparseTensor`.
+  For each point cloud in the given :py:class:`~minuet.tensors.SparseTensor`,
+  the feature tensor will be reduced with :py:func:`torch.mean` function.
+  If there are multiple point clouds in the
+  :py:class:`~minuet.tensors.SparseTensor`, the outputs will be stacked together
+  with the batch order.
+
+  Args:
+    x: the given :py:class:`~minuet.tensors.SparseTensor` for average pooling
+
+  Returns:
+    the result tensor after average pooling
+
+  """
   if x.batch_dims is not None:
     outputs = []
     for k in range(x.batch_size):
@@ -19,6 +34,21 @@ def global_avg_pool(x: SparseTensor):
 
 
 def global_sum_pool(x: SparseTensor):
+  """
+  Applies sum pooling on the given :py:class:`~minuet.tensors.SparseTensor`.
+  For each point cloud in the given :py:class:`~minuet.tensors.SparseTensor`,
+  the feature tensor will be reduced with :py:func:`torch.sum` function.
+  If there are multiple point clouds in the
+  :py:class:`~minuet.tensors.SparseTensor`, the outputs will be stacked together
+  with the batch order.
+
+  Args:
+    x: the given :py:class:`~minuet.tensors.SparseTensor` for sum pooling
+
+  Returns:
+    the result tensor after sum pooling
+
+  """
   if x.batch_dims is not None:
     outputs = []
     for k in range(x.batch_size):
@@ -32,6 +62,21 @@ def global_sum_pool(x: SparseTensor):
 
 
 def global_max_pool(x: SparseTensor):
+  """
+  Applies max pooling on the given :py:class:`~minuet.tensors.SparseTensor`.
+  For each point cloud in the given :py:class:`~minuet.tensors.SparseTensor`,
+  the feature tensor will be reduced with :py:func:`torch.max` function.
+  If there are multiple point clouds in the
+  :py:class:`~minuet.tensors.SparseTensor`, the outputs will be stacked together
+  with the batch order.
+
+  Args:
+    x: the given :py:class:`~minuet.tensors.SparseTensor` for average pooling
+
+  Returns:
+    the result tensor after average pooling
+
+  """
   if x.batch_dims is not None:
     outputs = []
     for k in range(x.batch_size):

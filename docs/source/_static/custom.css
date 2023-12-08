@@ -1,0 +1,7 @@
+.bd-sidebar-primary {
+    overflow-y: initial;
+    padding: 2rem 1.5rem 1rem;
+}
+.strike {
+    text-decoration: line-through;
+}

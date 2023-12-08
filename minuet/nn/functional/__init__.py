@@ -1,5 +1,4 @@
 from . import _C
-from .sorting import *
 from .indexing import *
 from .hash import *
 from .scan import *

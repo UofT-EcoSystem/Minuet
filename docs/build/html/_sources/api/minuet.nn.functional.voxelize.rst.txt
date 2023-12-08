@@ -1,0 +1,29 @@
+minuet.nn.functional.voxelize
+=============================
+
+.. automodule:: minuet.nn.functional.voxelize
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      voxelize
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
