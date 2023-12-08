@@ -29,15 +29,18 @@ padding and kernel launching overheads.
 
 ## Benchmarks
 
-![End-To-End Performance](assets/benchmark-end-to-end.png)
-
-![Map Step Performance](assets/benchmark-map-step.png)
-
 Our evaluations show that Minuet significantly outperforms prior
 SC engines by on average $1.74\times$ (up to $2.22\times$) for end-to-end point
 cloud network executions. Our novel segmented sorting double-traversed binary
 search algorithm achieves superior speedups by $15.8\times$ on average
 (up to $26.8\times$) over prior SC engines in the Map step.
+
+### End-To-End Performance
+
+![](assets/benchmark-end-to-end.png)
+
+### Map Step Performance 
+![Map Step Performance](assets/benchmark-map-step.png)
 
 ## Installation
 
