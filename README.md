@@ -3,7 +3,7 @@
 Minuet is a library that efficiently implements sparse 
 convolutions for point clouds on GPUs.
 
-#### [Documentation](https://uoft-ecosystem.github.io/Minuet) | [Research Paper](https://www.cs.toronto.edu/~jcyang/minuet.pdf) | [Artifact Evaluation](https://github.com/Kipsora/MinuetArtifacts)
+#### [Documentation](https://uoft-ecosystem.github.io/Minuet) | [Research Paper](https://arxiv.org/abs/2401.06145) | [Artifact Evaluation](https://github.com/Kipsora/MinuetArtifacts)
 
 ## Introduction
 
