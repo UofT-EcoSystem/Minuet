@@ -49,6 +49,13 @@ pip3 install "torch~=2.1" "packaging~=23.2"
 CMAKE_BUILD_PARALLEL_LEVEL=$(nproc) pip3 install .
 ```
 
+## TODOs
+
+- [ ] Support backward operators for training
+- [ ] Support FP16/BF16 data types
+- [ ] Add PyPI wheels for easy installation
+- [ ] Integrate other existing dataflows for computing sparse convolution
+
 ## License
 
 Please refer to the [LICENSE](LICENSE) file.
